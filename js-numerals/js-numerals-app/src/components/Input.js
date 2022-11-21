@@ -1,25 +1,18 @@
 import { TextField } from "@mui/material";
+import { NumericFormat } from "react-number-format";
 
 export default function Input({ number, setNumber }) {
-  function handleOnChange(event) {
-    event.preventDefault();
-    const { value } = event.target;
-    setNumber(value);
-  }
 
+  console.log(number);
   return (
+    <NumericFormat
+      value={number.formattedValue}
+      thousandSeparator=" "
+      customInput={TextField}
+      onValueChange={(values) => {
+        const {formattedValue, value} = values;
+        setNumber({formattedValue, value});
+      }}    />
 
-    <TextField
-      id="standard-basic"
-      variant="standard"
-      label="Enter a number"
-      placeholder="e.g. 100"
-      type="number"
-      value={number}
-      onChange={(event) => handleOnChange(event)}
-      sx={{ width: "250px", my: 5 }}
-      color="warning"
-
-    />
   );
 }
