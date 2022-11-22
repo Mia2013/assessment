@@ -5,7 +5,7 @@ import { Box, Grid, Typography } from "@mui/material";
 
 import Title from "./components/Title";
 import Input from "./components/Input";
-import GetNumberToEnglishWord from "./components/GetNumberToEnglishWord";
+import DisplayWord from "./components/DisplayWord";
 
 const styles = {
   app: {
@@ -36,11 +36,16 @@ function App() {
             Convert a number to an English word representation
           </Typography>
         </Grid>
-        <Grid item xs={10} sm={4} sx={{ mx: "auto", textAlign: "center" }}>
+        <Grid
+          item
+          xs={10}
+          sm={7}
+          sx={{ mx: "auto", textAlign: "center", my: 3 }}
+        >
           <Input number={number} setNumber={setNumber} />
         </Grid>
-        <Grid item xs={10} sm={6} md={4} sx={{ mx: "auto", textAlign: "center" }}>
-          <GetNumberToEnglishWord />
+        <Grid item xs={10} sm={7} sx={{ mx: "auto", textAlign: "center" }}>
+          <DisplayWord number={number} />
         </Grid>
       </Grid>
     </Box>
