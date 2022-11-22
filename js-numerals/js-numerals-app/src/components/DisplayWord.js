@@ -7,14 +7,17 @@ export default function DisplayWord({ number }) {
   const [alert, setAlert] = useState(false);
 
   useEffect(() => {
-    if (number.value !== "") {
-      if (typeof number.value === "number") {
-        setWord(digitsToEnglish(number.value));
-        setAlert(false);
-      } else {
-        setAlert(true);
+    const delayToShowWord = setTimeout(() => {
+      if (number.value !== "") {
+        if (typeof number.value === "number") {
+          setWord(digitsToEnglish(number.value));
+          setAlert(false);
+        } else {
+          setAlert(true);
+        }
       }
-    }
+    }, 1000);
+    return () => clearTimeout(delayToShowWord);
   }, [number.value]);
 
   return (
