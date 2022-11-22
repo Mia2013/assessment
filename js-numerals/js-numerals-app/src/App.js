@@ -27,7 +27,7 @@ function App() {
   return (
     <Box className="App" style={styles.app}>
       <Grid container>
-        <Grid item xs={12} sx={{ textAlign: "center", mt: 10 }}>
+        <Grid item xs={12} sx={{ textAlign: "center", mt: { xs: 6, sm: 10 } }}>
           <Title title="Arabic Number Conversion Tool" />
         </Grid>
         <Grid item xs={12} sx={{ textAlign: "center", mt: 5, mb: 3 }}>
