@@ -1,4 +1,11 @@
 import { useState, useEffect } from "react";
+import { Box } from "@mui/material";
+import { Routes, Route } from "react-router-dom";
+
+import Home from "./pages/Home";
+import Edit from "./pages/Edit";
+import New from "./pages/New";
+
 interface User {
   id: number;
   last_name: string;
@@ -12,9 +19,11 @@ interface User {
 function App() {
   const [users, setUsers] = useState<User[]>([]);
   const [alert, setAlert] = useState<string>("");
+  const url = "https://assessment-users-backend.herokuapp.com";
+  const usersPerPage = 10;
+  const paginationCount = Math.ceil(users.length / usersPerPage);
 
   async function getUsers() {
-    const url = "https://assessment-users-backend.herokuapp.com";
     try {
       const response = await fetch(`${url}/users.json`);
       const result = await response.json();
@@ -32,7 +41,15 @@ function App() {
     getUsers();
   }, []);
 
-  return <div className="App"></div>;
+  return (
+    <Box className="App">
+      <Routes>
+        <Route path="/" element={<Home paginationCount={paginationCount} />} />
+        <Route path="new" element={<New />} />
+        <Route path="edit" element={<Edit />} />
+      </Routes>
+    </Box>
+  );
 }
 
 export default App;
