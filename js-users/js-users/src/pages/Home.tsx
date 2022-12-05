@@ -16,6 +16,7 @@ type stylesObject = {
     backgroundRepeat: string;
     backgroundSize: string;
     backgroundPosition: string;
+    minHeight: string;
   };
 };
 
@@ -23,8 +24,9 @@ const styles: stylesObject = {
   homeContainer: {
     backgroundImage: `url(${process.env.PUBLIC_URL}/background.png)`,
     backgroundRepeat: "no-repeat",
-    backgroundSize: "100% 100%",
-    backgroundPosition: "center",
+    backgroundSize: "cover",
+    backgroundPosition: "center center",
+    minHeight: "100vh",
   },
 };
 
@@ -43,7 +45,7 @@ export default function Home({
             textAlign: "center",
             mx: "auto",
             width: "100%",
-            maxWidth: "450px",
+            maxWidth: { xs: "300px", md: "450px" },
             backgroundColor: "rgba(255, 255, 255, 0.8)",
           }}
         >
