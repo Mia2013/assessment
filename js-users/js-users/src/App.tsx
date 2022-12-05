@@ -5,16 +5,9 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Edit from "./pages/Edit";
 import New from "./pages/New";
+import { User } from './types';
 
-interface User {
-  id: number;
-  last_name: string;
-  first_name: string;
-  status: string;
-  created_at: Date;
-  updated_at: Date;
-  url: string;
-}
+
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
@@ -44,7 +37,7 @@ function App() {
   return (
     <Box className="App">
       <Routes>
-        <Route path="/" element={<Home paginationCount={paginationCount} />} />
+        <Route path="/" element={<Home paginationCount={paginationCount} usersPerPage={usersPerPage} users={users}/>} />
         <Route path="new" element={<New />} />
         <Route path="edit" element={<Edit />} />
       </Routes>
