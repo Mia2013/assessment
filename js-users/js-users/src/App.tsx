@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Box } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Edit from "./pages/Edit";
 import AddNewUser from "./pages/AddNewUser";
-import { getData } from "./components/utils";
-import { User } from "./types";
+import { Users } from "./types";
 
 type stylesObject = {
   container: {
@@ -29,42 +28,14 @@ const styles: stylesObject = {
 };
 
 function App() {
-  const [users, setUsers] = useState<User[]>([]);
-  const [alert, setAlert] = useState<string>("");
-
-  const usersPerPage = 10;
-  const paginationCount = Math.ceil(users.length / usersPerPage);
-
-  async function getUsers() {
-    try {
-      const result = await getData();
-      setUsers([...result]);
-      setAlert("");
-    } catch (error) {
-      setAlert("Sorry, but something went wrong, please try again later");
-    }
-  }
-
-  useEffect(() => {
-    getUsers();
-  }, []);
+  const [users, setUsers] = useState<Users>([]);
 
   return (
     <Box className="App" style={styles.container}>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              paginationCount={paginationCount}
-              usersPerPage={usersPerPage}
-              users={users}
-              alert={alert}
-            />
-          }
-        />
+        <Route path="/" element={<Home users={users} setUsers={setUsers} />} />
         <Route path="new" element={<AddNewUser />} />
-        <Route path="edit" element={<Edit />} />
+        <Route path="edit/:id" element={<Edit />} />
       </Routes>
     </Box>
   );

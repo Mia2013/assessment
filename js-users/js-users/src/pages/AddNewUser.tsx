@@ -1,34 +1,19 @@
 import { Grid, Button, Box, TextField, Alert } from "@mui/material";
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, SyntheticEvent } from "react";
 import { addUser } from "../components/utils";
-
-type FormDataType = {
-  firstName: string;
-  lastName: string;
-};
-
-type AlertType = {
-  severity: "error" | "success";
-  display: boolean;
-  message: string;
-};
-
-type fieldsErrorType = {
-  firstName: boolean;
-  lastName: boolean;
-};
+import { FieldsError, FormData, AlertType, SeverityStatus } from "../types";
 
 export default function AddNewUser() {
-  const [fieldsError, setFieldsError] = useState<fieldsErrorType>({
+  const [fieldsError, setFieldsError] = useState<FieldsError>({
     firstName: false,
     lastName: false,
   });
   const [alert, setAlert] = useState<AlertType>({
-    severity: "error",
+    severity: SeverityStatus.Error,
     display: false,
     message: "",
   });
-  const [formData, setFormData] = useState<FormDataType>({
+  const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",
   });
@@ -38,9 +23,8 @@ export default function AddNewUser() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   }
 
-  function formValidation(formData: FormDataType) {
+  function formValidation(formData: FormData): boolean {
     const { firstName, lastName } = formData;
-    console.log(!!firstName);
     if (!firstName || !lastName) {
       setFieldsError({
         firstName: !formData.firstName,
@@ -51,27 +35,26 @@ export default function AddNewUser() {
     return true;
   }
 
-  async function handleOnSubmit(e: any) {
+  async function handleOnSubmit(e: SyntheticEvent) {
     e.preventDefault();
     if (formValidation(formData)) {
       setFieldsError({ firstName: false, lastName: false });
       try {
         await addUser(formData.firstName, formData.lastName);
         setAlert({
-          severity: "success",
+          severity: SeverityStatus.Success,
           display: true,
           message: "User added successfully",
         });
       } catch (error) {
         setAlert({
-          severity: "error",
+          severity: SeverityStatus.Error,
           display: true,
           message: "Something went wrong, please try again later",
         });
       }
     }
   }
-  console.log(formData);
 
   return (
     <Grid container>

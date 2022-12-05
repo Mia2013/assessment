@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   List,
   ListItem,
@@ -9,29 +9,34 @@ import {
 } from "@mui/material";
 
 import PaginationRounded from "../components/PaginationRounded";
-import { User } from "../types";
+import { HomeProps, Users } from "../types";
+import { getData } from "../components/utils";
 
-type HomeProps = {
-  paginationCount: number;
-  usersPerPage: number;
-  users: User[];
-  alert: string;
-};
-
-
-
-export default function Home({
-  paginationCount,
-  usersPerPage,
-  users,
-  alert,
-}: HomeProps) {
+export default function Home({ users, setUsers }: HomeProps) {
   const [page, setPage] = useState<number>(1);
+  const [alert, setAlert] = useState<string>("");
+
+  const usersPerPage = 10;
+  const paginationCount = Math.ceil(users.length / usersPerPage);
+
+  async function getUsers() {
+    try {
+      const result = await getData();
+      setUsers([...result]);
+      setAlert("");
+    } catch (error) {
+      setAlert("Sorry, but something went wrong, please try again later");
+    }
+  }
+
+  useEffect(() => {
+    getUsers();
+  }, []);
 
   return (
     <Grid container>
       {!alert ? (
-        <Grid container item xs={12}>
+        <Grid container item xs={12} sx={{ my: 10 }}>
           <List
             sx={{
               textAlign: "center",
@@ -60,7 +65,6 @@ export default function Home({
           <Grid item xs={12}>
             <PaginationRounded
               paginationCount={paginationCount}
-              page={page}
               setPage={setPage}
             />
           </Grid>

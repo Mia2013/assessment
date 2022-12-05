@@ -3,13 +3,11 @@ import Stack from "@mui/material/Stack";
 
 type PaginationRoundedProps = {
   paginationCount: number;
-  page: number;
-  setPage: React.Dispatch<React.SetStateAction<number>>;
+  setPage: (value: number) => void;
 };
 
 export default function PaginationRounded({
   paginationCount,
-  page,
   setPage,
 }: PaginationRoundedProps) {
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
