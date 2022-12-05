@@ -22,7 +22,7 @@ export default function PaginationRounded({
       sx={{
         mx: "auto",
         alignItems: "center",
-        maxWidth: "450px",
+        maxWidth: { xs: "300px", md: "450px" },
         backgroundColor: "rgba(255, 255, 255, 0.8)",
       }}
     >
