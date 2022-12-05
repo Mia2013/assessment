@@ -4,8 +4,8 @@ import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Edit from "./pages/Edit";
-import New from "./pages/New";
-import { getData } from "./utils";
+import AddNewUser from "./pages/AddNewUser";
+import { getData } from "./components/utils";
 import { User } from "./types";
 
 type stylesObject = {
@@ -63,7 +63,7 @@ function App() {
             />
           }
         />
-        <Route path="new" element={<New />} />
+        <Route path="new" element={<AddNewUser />} />
         <Route path="edit" element={<Edit />} />
       </Routes>
     </Box>
