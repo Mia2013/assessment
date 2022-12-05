@@ -18,25 +18,7 @@ type HomeProps = {
   alert: string;
 };
 
-type stylesObject = {
-  homeContainer: {
-    backgroundImage: string;
-    backgroundRepeat: string;
-    backgroundSize: string;
-    backgroundPosition: string;
-    minHeight: string;
-  };
-};
 
-const styles: stylesObject = {
-  homeContainer: {
-    backgroundImage: `url(${process.env.PUBLIC_URL}/background.png)`,
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    backgroundPosition: "center center",
-    minHeight: "100vh",
-  },
-};
 
 export default function Home({
   paginationCount,
@@ -47,7 +29,7 @@ export default function Home({
   const [page, setPage] = useState<number>(1);
 
   return (
-    <Grid container style={styles.homeContainer}>
+    <Grid container>
       {!alert ? (
         <Grid container item xs={12}>
           <List
@@ -61,7 +43,7 @@ export default function Home({
           >
             {users
               .slice((page - 1) * usersPerPage, page * usersPerPage)
-              .map((user) => {
+              .map((user, index) => {
                 return (
                   <Grid item xs={12} key={user.id}>
                     <ListItem>
