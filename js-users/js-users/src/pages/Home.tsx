@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   List,
   ListItem,
@@ -6,10 +6,11 @@ import {
   Divider,
   Grid,
   Alert,
+  Link,
 } from "@mui/material";
 
 import PaginationRounded from "../components/PaginationRounded";
-import { HomeProps, Users } from "../types";
+import { HomeProps } from "../types";
 import { getData } from "../components/utils";
 
 export default function Home({ users, setUsers }: HomeProps) {
@@ -23,6 +24,7 @@ export default function Home({ users, setUsers }: HomeProps) {
     try {
       const result = await getData();
       setUsers([...result]);
+      console.log(users);
       setAlert("");
     } catch (error) {
       setAlert("Sorry, but something went wrong, please try again later");
@@ -48,7 +50,7 @@ export default function Home({ users, setUsers }: HomeProps) {
           >
             {users
               .slice((page - 1) * usersPerPage, page * usersPerPage)
-              .map((user, index) => {
+              .map((user) => {
                 return (
                   <Grid item xs={12} key={user.id}>
                     <ListItem>

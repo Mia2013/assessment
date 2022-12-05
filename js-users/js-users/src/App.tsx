@@ -1,10 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Box } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
-import Edit from "./pages/Edit";
 import AddNewUser from "./pages/AddNewUser";
+import EditUser from "./pages/EditUser";
 import { Users } from "./types";
 
 type stylesObject = {
@@ -35,7 +35,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home users={users} setUsers={setUsers} />} />
         <Route path="new" element={<AddNewUser />} />
-        <Route path="edit/:id" element={<Edit />} />
+        <Route path="edit/:id" element={<EditUser />} />
       </Routes>
     </Box>
   );
