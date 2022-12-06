@@ -3,6 +3,7 @@ import { Grid, Button, Box, TextField, Alert, Typography } from "@mui/material";
 import { useState, ChangeEvent, SyntheticEvent } from "react";
 import { addUser } from "../components/utils";
 import { FieldsError, FormData, AlertType, SeverityStatus } from "../types";
+import { useNavigate } from "react-router-dom";
 
 export default function AddNewUser() {
   const [fieldsError, setFieldsError] = useState<FieldsError>({
@@ -18,6 +19,8 @@ export default function AddNewUser() {
     firstName: "",
     lastName: "",
   });
+
+  const navigate = useNavigate();
 
   function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -47,6 +50,7 @@ export default function AddNewUser() {
           display: true,
           message: "User added successfully",
         });
+        setFormData({ firstName: "", lastName: "" });
       } catch (error) {
         setAlert({
           severity: SeverityStatus.Error,
@@ -57,13 +61,35 @@ export default function AddNewUser() {
     }
   }
 
+  const handleOnClickNavigateBack = () => {
+    navigate("/");
+  };
+
   return (
     <Grid container>
       <Grid
         item
         xs={12}
         sx={{
-          mt: 15,
+          m: 5,
+          textAlign: "end",
+        }}
+      >
+        <Button
+          onClick={() => handleOnClickNavigateBack()}
+          variant="contained"
+          sx={{
+            backgroundColor: "#FF177A",
+          }}
+        >
+          Back
+        </Button>
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        sx={{
+          mt: 5,
           textAlign: "center",
           mx: "auto",
           width: "100%",
@@ -82,7 +108,9 @@ export default function AddNewUser() {
           autoComplete="off"
           onSubmit={handleOnSubmit}
         >
-          <Typography component="h3">Add a new user</Typography>
+          <Typography variant="h3" my={3}>
+            Add new user
+          </Typography>
 
           <div>
             <TextField

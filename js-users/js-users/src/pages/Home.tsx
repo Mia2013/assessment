@@ -46,7 +46,7 @@ export default function Home({ users, setUsers }: HomeProps) {
   return (
     <Grid container>
       {!alert ? (
-        <Grid container item xs={12} sx={{ my: 10 }}>
+        <Grid container item xs={12} sx={{ my: 5 }}>
           <List
             sx={{
               textAlign: "center",
@@ -57,6 +57,8 @@ export default function Home({ users, setUsers }: HomeProps) {
             }}
           >
             {users
+              .sort((a, b) => a.id - b.id)
+
               .slice((page - 1) * usersPerPage, page * usersPerPage)
               .map((user) => {
                 return (
@@ -66,7 +68,10 @@ export default function Home({ users, setUsers }: HomeProps) {
                         primary={`${user.first_name} ${user.last_name} `}
                         secondary={user.created_at}
                       />
-                      <Button onClick={() => handleOnClick(user.id)}>
+                      <Button
+                        onClick={() => handleOnClick(user.id)}
+                        sx={{ color: "#FF177A" }}
+                      >
                         Edit
                       </Button>
                     </ListItem>
@@ -90,7 +95,6 @@ export default function Home({ users, setUsers }: HomeProps) {
               mx: "auto",
               width: "100%",
               maxWidth: { xs: "300px", md: "450px" },
-              backgroundColor: "#FF177A",
             }}
           >
             <Button

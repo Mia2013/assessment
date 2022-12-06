@@ -11,6 +11,7 @@ import {
   User,
   UserStatus,
 } from "../types";
+import { useNavigate } from "react-router-dom";
 
 export default function EditUser() {
   const [fieldsError, setFieldsError] = useState<FieldsError>({
@@ -36,6 +37,7 @@ export default function EditUser() {
   });
   const [loadingAlert, setLoadingAlert] = useState<string>("");
   const { userId } = useParams();
+  const navigate = useNavigate();
 
   async function getOneUser() {
     try {
@@ -75,17 +77,18 @@ export default function EditUser() {
     if (formValidation(formData)) {
       setFieldsError({ firstName: false, lastName: false });
       try {
+        await editUser(formData.lastName, formData.firstName, Number(userId));
         setUser((prev) => ({
           ...prev,
           last_name: formData.lastName,
           first_name: formData.firstName,
         }));
-        await editUser(user);
         setAlert({
           severity: SeverityStatus.Success,
           display: true,
           message: "User updated successfully",
         });
+        setFormData({ firstName: "", lastName: "" });
       } catch (error) {
         setAlert({
           severity: SeverityStatus.Error,
@@ -95,6 +98,9 @@ export default function EditUser() {
       }
     }
   }
+  const handleOnClickNavigateBack = () => {
+    navigate("/");
+  };
 
   return (
     <Grid container>
@@ -102,7 +108,25 @@ export default function EditUser() {
         item
         xs={12}
         sx={{
-          mt: 15,
+          m: 5,
+          textAlign: "end",
+        }}
+      >
+        <Button
+          onClick={() => handleOnClickNavigateBack()}
+          variant="contained"
+          sx={{
+            backgroundColor: "#FF177A",
+          }}
+        >
+          Back
+        </Button>
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        sx={{
+          mt: 5,
           textAlign: "center",
           mx: "auto",
           width: "100%",
@@ -121,8 +145,13 @@ export default function EditUser() {
           autoComplete="off"
           onSubmit={handleOnSubmit}
         >
-          <Typography component="h3">Update user</Typography>
+          <Typography variant="h3" my={3}>
+            Update user
+          </Typography>
           <div>
+            <Typography variant="body2" align="left" mx={3}>
+              Old first name: {user.first_name}
+            </Typography>
             <TextField
               error={fieldsError.firstName}
               id="outlined-error-helper-text"
@@ -135,6 +164,10 @@ export default function EditUser() {
             />
           </div>
           <div>
+            <Typography variant="body2" align="left" mx={3}>
+              Old last name: {user.last_name}
+            </Typography>
+
             <TextField
               error={fieldsError.lastName}
               id="outlined-error-helper-text"
