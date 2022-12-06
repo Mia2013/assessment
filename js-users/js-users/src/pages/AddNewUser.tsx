@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Button, Box, TextField, Alert } from "@mui/material";
+import { Grid, Button, Box, TextField, Alert, Typography } from "@mui/material";
 import { useState, ChangeEvent, SyntheticEvent } from "react";
 import { addUser } from "../components/utils";
 import { FieldsError, FormData, AlertType, SeverityStatus } from "../types";
@@ -82,6 +82,8 @@ export default function AddNewUser() {
           autoComplete="off"
           onSubmit={handleOnSubmit}
         >
+          <Typography component="h3">Add a new user</Typography>
+
           <div>
             <TextField
               error={fieldsError.firstName}

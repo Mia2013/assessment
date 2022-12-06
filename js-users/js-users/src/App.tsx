@@ -35,7 +35,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home users={users} setUsers={setUsers} />} />
         <Route path="new" element={<AddNewUser />} />
-        <Route path="edit/:id" element={<EditUser />} />
+        <Route path="edit/:userId" element={<EditUser />} />
       </Routes>
     </Box>
   );

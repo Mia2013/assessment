@@ -1,11 +1,10 @@
-export interface User  {
+export type User = {
   id: number;
   last_name: string;
   first_name: string;
   status: UserStatus;
   created_at: string;
   updated_at: string;
-  url: string;
 }
 
 export type Users = User[]
