@@ -1,20 +1,14 @@
 import React, { useState, useEffect } from "react";
 import {
-  List,
-  ListItem,
-  ListItemText,
-  Divider,
   Grid,
   Alert,
   Button,
-  Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
 import PaginationRounded from "../components/PaginationRounded";
 import { HomeProps, UserStatus } from "../types";
 import { getData } from "../components/utils";
-import LockTheUser from "../components/LockTheUser";
+import UserList from "../components/UserList";
 
 export default function Home({ users, setUsers }: HomeProps) {
   const [page, setPage] = useState<number>(1);
@@ -44,60 +38,18 @@ export default function Home({ users, setUsers }: HomeProps) {
   const handleOnClickAddNewUser = () => {
     navigate("/new");
   };
-  console.log(users);
 
-
-
-  
   return (
     <Grid container>
       {!alert ? (
         <Grid container item xs={12} sx={{ my: 5 }}>
-          <List
-            sx={{
-              textAlign: "center",
-              mx: "auto",
-              width: "100%",
-              maxWidth: { xs: "300px", md: "450px" },
-              backgroundColor: "rgba(255, 255, 255, 0.8)",
-            }}
-          >
-            {users
-              .sort((a, b) => a.id - b.id)
-              .slice((page - 1) * usersPerPage, page * usersPerPage)
-              .map((user) => {
-                return (
-                  <Grid item xs={12} key={user.id}>
-                    <ListItem>
-                      <ListItemText
-                        primary={
-                          <Typography
-                            sx={{
-                              textDecoration:
-                                user.status === UserStatus.Active
-                                  ? "none"
-                                  : "line-through",
-                            }}
-                          >
-                            {user.first_name} {user.last_name}
-                          </Typography>
-                        }
-                        secondary={user.created_at}
-                      />
-                      <Button
-                        onClick={() => handleOnClick(user.id)}
-                        sx={{ color: "#FF177A" }}
-                      >
-                        Edit
-                      </Button>
-                      <LockTheUser  user={user}/>
-                    </ListItem>
-                    <Divider component="li" />
-                  </Grid>
-                );
-              })}
-          </List>
           <Grid item xs={12}>
+            <UserList
+              users={users}
+              handleOnClick={handleOnClick}
+              page={page}
+              usersPerPage={usersPerPage}
+            />
             <PaginationRounded
               paginationCount={paginationCount}
               setPage={setPage}

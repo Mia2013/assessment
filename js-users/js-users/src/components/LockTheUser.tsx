@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
@@ -28,6 +28,7 @@ export default function LockTheUser({ user }: LockTheUserProps) {
       setAlert(true);
     }
   }
+
 
   return (
     <Box component="form" onSubmit={handleOnSubmit}>
