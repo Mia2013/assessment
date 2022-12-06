@@ -2,7 +2,7 @@ import { Grid, Button, Box, TextField, Alert, Typography } from "@mui/material";
 import React, { useState, ChangeEvent, SyntheticEvent, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import { getOneUserById, editUser } from "../components/utils";
+import { getOneUserById, editUser } from "../utils/utils";
 import {
   FieldsError,
   FormData,
@@ -10,7 +10,7 @@ import {
   SeverityStatus,
   User,
   UserStatus,
-} from "../types";
+} from "../types/types";
 import { useNavigate } from "react-router-dom";
 
 export default function EditUser() {

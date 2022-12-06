@@ -6,17 +6,9 @@ import UserProvider from "./context/userContext";
 import Home from "./pages/Home";
 import AddNewUser from "./pages/AddNewUser";
 import EditUser from "./pages/EditUser";
-import { Users } from "./types";
+import { stylesObject } from "./types/types";
 
-type stylesObject = {
-  container: {
-    backgroundImage: string;
-    backgroundRepeat: string;
-    backgroundSize: string;
-    backgroundPosition: string;
-    minHeight: string;
-  };
-};
+
 
 const styles: stylesObject = {
   container: {
@@ -29,16 +21,12 @@ const styles: stylesObject = {
 };
 
 function App() {
-  const [users, setUsers] = useState<Users>([]);
 
   return (
     <UserProvider>
       <Box className="App" style={styles.container}>
         <Routes>
-          <Route
-            path="/"
-            element={<Home users={users} setUsers={setUsers} />}
-          />
+          <Route path="/" element={<Home />} />
           <Route path="new" element={<AddNewUser />} />
           <Route path="edit/:userId" element={<EditUser />} />
         </Routes>

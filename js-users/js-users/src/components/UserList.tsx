@@ -11,7 +11,7 @@ import {
   Typography,
   Box,
 } from "@mui/material";
-import { ListProps, UserStatus } from "../types";
+import { ListProps, UserStatus } from "../types/types";
 import LockTheUser from "./LockTheUser";
 
 export default function UserList({
@@ -30,7 +30,7 @@ export default function UserList({
         backgroundColor: "rgba(255, 255, 255, 0.8)",
       }}
     >
-      {users
+      {users ? users
         .sort((a, b) => a.id - b.id)
         .slice((page - 1) * usersPerPage, page * usersPerPage)
         .map((user) => {
@@ -63,7 +63,7 @@ export default function UserList({
               <Divider component="li" />
             </Grid>
           );
-        })}
+        }): "" }
     </List>
   );
 }

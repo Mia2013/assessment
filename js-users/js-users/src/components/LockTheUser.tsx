@@ -4,8 +4,8 @@ import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
 import LockOpen from "@mui/icons-material/LockOpen";
 import Lock from "@mui/icons-material/Lock";
-import { LockTheUserProps } from "../types";
-import { updateUser } from "./utils";
+import { LockTheUserProps } from "../types/types";
+import { updateUser } from "../utils/utils";
 
 export default function LockTheUser({ user }: LockTheUserProps) {
   const [isLocked, setIsLocked] = React.useState<boolean>(

@@ -4,27 +4,17 @@ import {
   UserContextType,
   Users,
   UserStatus,
-} from "../types";
+} from "../types/types";
 
 export const UserContext = React.createContext<UserContextType | null>(null);
 
 const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
-  const [users, setUsers] = React.useState<Users>([
-    {
-      id: -5000,
-      last_name: "",
-      first_name: "",
-      status: UserStatus.Active,
-      created_at: "",
-      updated_at: "",
-      url: "",
-    },
-  ]);
+  const [users, setUsers] = React.useState<Users>();
 
 
 
   return (
-    <UserContext.Provider value={{ users }}>
+    <UserContext.Provider value={{ users, setUsers }}>
       {children}
     </UserContext.Provider>
   );

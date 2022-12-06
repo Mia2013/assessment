@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UserStatus, User } from "../types";
+import { UserStatus, User } from "../types/types";
 
 const URL = "https://assessment-users-backend.herokuapp.com";
 

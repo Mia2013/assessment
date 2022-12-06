@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from "react";
-import {
-  Grid,
-  Alert,
-  Button,
-} from "@mui/material";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Grid, Alert, Button } from "@mui/material";
 import PaginationRounded from "../components/PaginationRounded";
-import { HomeProps, UserStatus } from "../types";
-import { getData } from "../components/utils";
+import { UserContextType } from "../types/types";
+import { getData } from "../utils/utils";
 import UserList from "../components/UserList";
 
-export default function Home({ users, setUsers }: HomeProps) {
-  const [page, setPage] = useState<number>(1);
-  const [alert, setAlert] = useState<string>("");
+import { UserContext } from "../context/userContext";
+
+export default function Home() {
+  const { users, setUsers } = React.useContext(UserContext) as UserContextType;
+
+  const [page, setPage] = React.useState<number>(1);
+  const [alert, setAlert] = React.useState<string>("");
   const navigate = useNavigate();
 
   const usersPerPage = 10;
-  const paginationCount = Math.ceil(users.length / usersPerPage);
+  const paginationCount = Math.ceil(users ? users.length / usersPerPage : 0);
 
   async function getUsers() {
     try {
@@ -28,15 +28,16 @@ export default function Home({ users, setUsers }: HomeProps) {
     }
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     getUsers();
   }, []);
 
-  const handleOnClick = (id: number) => {
-    navigate(`/edit/${id}`);
-  };
-  const handleOnClickAddNewUser = () => {
-    navigate("/new");
+  const handleOnClickNavigate = (userId?: number): void => {
+    if (userId) {
+      navigate(`/edit/${userId}`);
+    } else {
+      navigate("/new");
+    }
   };
 
   return (
@@ -46,7 +47,7 @@ export default function Home({ users, setUsers }: HomeProps) {
           <Grid item xs={12}>
             <UserList
               users={users}
-              handleOnClick={handleOnClick}
+              handleOnClick={handleOnClickNavigate}
               page={page}
               usersPerPage={usersPerPage}
             />
@@ -67,7 +68,7 @@ export default function Home({ users, setUsers }: HomeProps) {
             }}
           >
             <Button
-              onClick={() => handleOnClickAddNewUser()}
+              onClick={() => handleOnClickNavigate()}
               variant="contained"
               sx={{
                 width: "100%",
