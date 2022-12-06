@@ -1,10 +1,11 @@
-export type User = {
+export interface User {
   id: number;
   last_name: string;
   first_name: string;
   status: UserStatus;
   created_at: string;
   updated_at: string;
+  url: string;
 }
 
 export type Users = User[]
@@ -15,10 +16,10 @@ export type HomeProps = {
 }
 
 
-export enum UserStatus {
-  Active = 'active',
-  Locked = "locked",
-}
+  export enum UserStatus {
+    Active = 'active',
+    Locked = "locked",
+  }
 
 export type FormData = {
   firstName: string;
@@ -39,4 +40,8 @@ export enum SeverityStatus{
 export type FieldsError= {
   firstName: boolean;
   lastName: boolean;
+};
+
+export type LockTheUser = {
+  user: User;
 };

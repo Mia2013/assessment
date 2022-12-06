@@ -47,7 +47,6 @@ export async function getOneUserById(userId: number) {
   }
 }
 
-
 export async function editUser(
   firstName: string,
   lastName: string,
@@ -57,6 +56,31 @@ export async function editUser(
     const formData = {
       first_name: firstName,
       last_name: lastName,
+    };
+    const response = await axios.put(`${URL}/users/${userId}.json`, formData, {
+      headers: { "Content-Type": "application/json" },
+    });
+    if (response.status === 204) {
+      const result = response.data;
+      return result;
+    }
+    throw new Error();
+  } catch (error) {
+    throw new Error();
+  }
+}
+
+export async function updateUser(
+  firstName: string,
+  lastName: string,
+  isLocked: boolean,
+  userId: number
+) {
+  try {
+    const formData = {
+      first_name: firstName,
+      last_name: lastName,
+      status: isLocked ? "active" : "locked",
     };
     const response = await axios.put(`${URL}/users/${userId}.json`, formData, {
       headers: { "Content-Type": "application/json" },

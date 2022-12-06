@@ -7,12 +7,14 @@ import {
   Grid,
   Alert,
   Button,
+  Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import PaginationRounded from "../components/PaginationRounded";
-import { HomeProps } from "../types";
+import { HomeProps, UserStatus } from "../types";
 import { getData } from "../components/utils";
+import LockTheUser from "../components/LockTheUser";
 
 export default function Home({ users, setUsers }: HomeProps) {
   const [page, setPage] = useState<number>(1);
@@ -42,7 +44,11 @@ export default function Home({ users, setUsers }: HomeProps) {
   const handleOnClickAddNewUser = () => {
     navigate("/new");
   };
+  console.log(users);
 
+
+
+  
   return (
     <Grid container>
       {!alert ? (
@@ -58,14 +64,24 @@ export default function Home({ users, setUsers }: HomeProps) {
           >
             {users
               .sort((a, b) => a.id - b.id)
-
               .slice((page - 1) * usersPerPage, page * usersPerPage)
               .map((user) => {
                 return (
                   <Grid item xs={12} key={user.id}>
                     <ListItem>
                       <ListItemText
-                        primary={`${user.first_name} ${user.last_name} `}
+                        primary={
+                          <Typography
+                            sx={{
+                              textDecoration:
+                                user.status === UserStatus.Active
+                                  ? "none"
+                                  : "line-through",
+                            }}
+                          >
+                            {user.first_name} {user.last_name}
+                          </Typography>
+                        }
                         secondary={user.created_at}
                       />
                       <Button
@@ -74,6 +90,7 @@ export default function Home({ users, setUsers }: HomeProps) {
                       >
                         Edit
                       </Button>
+                      <LockTheUser  user={user}/>
                     </ListItem>
                     <Divider component="li" />
                   </Grid>

@@ -34,6 +34,7 @@ export default function EditUser() {
     status: UserStatus.Active,
     created_at: "",
     updated_at: "",
+    url: ""
   });
   const [loadingAlert, setLoadingAlert] = useState<string>("");
   const { userId } = useParams();
