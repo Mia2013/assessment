@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
+import UserProvider from "./context/userContext";
 
 import Home from "./pages/Home";
 import AddNewUser from "./pages/AddNewUser";
@@ -31,13 +32,18 @@ function App() {
   const [users, setUsers] = useState<Users>([]);
 
   return (
-    <Box className="App" style={styles.container}>
-      <Routes>
-        <Route path="/" element={<Home users={users} setUsers={setUsers} />} />
-        <Route path="new" element={<AddNewUser />} />
-        <Route path="edit/:userId" element={<EditUser />} />
-      </Routes>
-    </Box>
+    <UserProvider>
+      <Box className="App" style={styles.container}>
+        <Routes>
+          <Route
+            path="/"
+            element={<Home users={users} setUsers={setUsers} />}
+          />
+          <Route path="new" element={<AddNewUser />} />
+          <Route path="edit/:userId" element={<EditUser />} />
+        </Routes>
+      </Box>
+    </UserProvider>
   );
 }
 

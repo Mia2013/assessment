@@ -10,6 +10,10 @@ export interface User {
 
 export type Users = User[];
 
+export type UserContextType = {
+  users: Users;
+};
+
 export type HomeProps = {
   users: Users;
   setUsers: (value: Users) => void;
@@ -51,3 +55,7 @@ export type ListProps = {
   page: number;
   usersPerPage: number;
 };
+
+export interface UserProviderProps {
+  children: React.ReactNode;
+}
