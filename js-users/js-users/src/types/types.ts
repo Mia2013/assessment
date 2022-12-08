@@ -13,6 +13,7 @@ export type Users = User[] | undefined;
 export type UserContextType = {
   users: Users;
   setUsers: (value: Users) => void;
+  getUsers: ()=> void;
 };
 
 export enum UserStatus {

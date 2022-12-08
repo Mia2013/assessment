@@ -1,6 +1,6 @@
  const styles = {
   app: {
-    backgroundImage: `url(${process.env.PUBLIC_URL}/background.png)`,
+    backgroundImage: `url(${process.env.PUBLIC_URL}/background.png)`, 
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center center",

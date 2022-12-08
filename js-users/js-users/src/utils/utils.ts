@@ -12,7 +12,7 @@ export async function getData() {
     }
     throw new Error();
   } catch (error) {
-    throw new Error();
+    throw new Error((error as Error).message);
   }
 }
 
@@ -30,7 +30,7 @@ export async function addUser(firstName: string, lastName: string) {
     }
     throw new Error();
   } catch (error) {
-    throw new Error();
+    throw new Error((error as Error).message);
   }
 }
 
@@ -43,7 +43,7 @@ export async function getOneUserById(userId: number) {
     }
     throw new Error();
   } catch (error) {
-    throw new Error();
+    throw new Error((error as Error).message);
   }
 }
 
@@ -66,7 +66,7 @@ export async function editUser(
     }
     throw new Error();
   } catch (error) {
-    throw new Error();
+    throw new Error((error as Error).message);
   }
 }
 
@@ -91,6 +91,6 @@ export async function updateUser(
     }
     throw new Error();
   } catch (error) {
-    throw new Error();
+    throw new Error((error as Error).message);
   }
 }

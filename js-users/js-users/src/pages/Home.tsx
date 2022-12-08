@@ -10,7 +10,9 @@ import { UserContext } from "../context/userContext";
 import styles from "../style/styles";
 
 export default function Home() {
-  const { users, setUsers } = React.useContext(UserContext) as UserContextType;
+  const { users, setUsers, getUsers } = React.useContext(
+    UserContext
+  ) as UserContextType;
 
   const [page, setPage] = React.useState<number>(1);
   const [alert, setAlert] = React.useState<string>("");
@@ -21,18 +23,13 @@ export default function Home() {
     users ? users.length / usersPerPage : 0
   );
 
-  async function getUsers() {
+  React.useEffect(() => {
     try {
-      const result = await getData();
-      setUsers([...result]);
+      getUsers();
       setAlert("");
-    } catch (error) {
+    } catch (e) {
       setAlert("Sorry, but something went wrong, please try again later");
     }
-  }
-
-  React.useEffect(() => {
-    getUsers();
   }, []);
 
   const handleOnClickNavigate = (userId?: number): void => {
@@ -63,21 +60,14 @@ export default function Home() {
             <Button
               onClick={() => handleOnClickNavigate()}
               variant="contained"
-              sx={[
-                styles.button,
-                styles.buttonHover,
-              ]}
+              sx={[styles.button, styles.buttonHover]}
             >
               Add new User
             </Button>
           </Grid>
         </Grid>
       ) : (
-        <Grid
-          item
-          xs={12}
-          sx={[{ mt: 15 }, styles.homePageItems]}
-        >
+        <Grid item xs={12} sx={[{ mt: 15 }, styles.homePageItems]}>
           <Alert severity="error"> {alert}</Alert>
         </Grid>
       )}
