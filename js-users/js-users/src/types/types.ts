@@ -12,9 +12,8 @@ export type Users = User[] | undefined;
 
 export type UserContextType = {
   users: Users;
-  setUsers: (value: Users) => void
+  setUsers: (value: Users) => void;
 };
-
 
 export enum UserStatus {
   Active = "active",
@@ -25,7 +24,6 @@ export enum Path {
   New = "new",
   Edit = "edit",
 }
-
 
 export type FormData = {
   firstName: string;
@@ -62,14 +60,3 @@ export type ListProps = {
 export interface UserProviderProps {
   children: React.ReactNode;
 }
-
-
-export type stylesObject = {
-  container: {
-    backgroundImage: string;
-    backgroundRepeat: string;
-    backgroundSize: string;
-    backgroundPosition: string;
-    minHeight: string;
-  };
-};

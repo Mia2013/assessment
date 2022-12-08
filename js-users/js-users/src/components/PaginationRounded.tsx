@@ -1,6 +1,7 @@
-import React from 'react';
+import React from "react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import styles from "../style/styles";
 
 type PaginationRoundedProps = {
   paginationCount: number;
@@ -11,20 +12,12 @@ export default function PaginationRounded({
   paginationCount,
   setPage,
 }: PaginationRoundedProps) {
-  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number):void => {
     setPage(value);
   };
 
   return (
-    <Stack
-      spacing={2}
-      sx={{
-        mx: "auto",
-        alignItems: "center",
-        maxWidth: { xs: "300px", md: "450px" },
-        backgroundColor: "rgba(255, 255, 255, 0.8)",
-      }}
-    >
+    <Stack spacing={2} sx={[styles.homePageItems, styles.listBackground]}>
       <Pagination
         count={paginationCount}
         shape="rounded"
