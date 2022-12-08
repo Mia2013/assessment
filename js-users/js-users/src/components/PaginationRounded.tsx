@@ -17,7 +17,7 @@ export default function PaginationRounded({
   };
 
   return (
-    <Stack spacing={2} sx={[styles.homePageItems, styles.listBackground]}>
+    <Stack spacing={2} sx={[styles.pageItems, styles.listBackground]}>
       <Pagination
         count={paginationCount}
         shape="rounded"

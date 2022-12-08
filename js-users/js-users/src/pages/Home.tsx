@@ -56,7 +56,7 @@ export default function Home() {
               setPage={setPage}
             />
           </Grid>
-          <Grid item xs={12} sx={styles.homePageItems}>
+          <Grid item xs={12} sx={styles.pageItems}>
             <Button
               onClick={() => handleOnClickNavigate()}
               variant="contained"
@@ -67,7 +67,7 @@ export default function Home() {
           </Grid>
         </Grid>
       ) : (
-        <Grid item xs={12} sx={[{ mt: 15 }, styles.homePageItems]}>
+        <Grid item xs={12} sx={[{ mt: 15 }, styles.pageItems]}>
           <Alert severity="error"> {alert}</Alert>
         </Grid>
       )}

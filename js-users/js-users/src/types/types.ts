@@ -13,7 +13,7 @@ export type Users = User[] | undefined;
 export type UserContextType = {
   users: Users;
   setUsers: (value: Users) => void;
-  getUsers: ()=> void;
+  getUsers: () => void;
 };
 
 export enum UserStatus {
@@ -60,4 +60,20 @@ export type ListProps = {
 
 export interface UserProviderProps {
   children: React.ReactNode;
+}
+
+export interface InputFieldProps {
+  error: boolean;
+  label: string;
+  name: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+export interface FormProps {
+  formData: FormData;
+  fieldsError: FieldsError;
+  handleOnSubmit: (value: React.SyntheticEvent) => void;
+  title: string;
+  buttonTitle: string;
+  handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

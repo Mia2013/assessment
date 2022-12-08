@@ -22,7 +22,7 @@ export default function UserList({
   usersPerPage,
 }: ListProps) {
   return (
-    <List sx={[styles.homePageItems, styles.listBackground]}>
+    <List sx={[styles.pageItems, styles.listBackground]}>
       {users
         ? users
             .sort((a, b) => a.id - b.id)
@@ -48,7 +48,7 @@ export default function UserList({
                     />
                     <Button
                       onClick={() => handleOnClick(user.id)}
-                      sx={styles.buttonColor}
+                      sx={styles.mainColor}
                     >
                       Edit
                     </Button>
