@@ -6,25 +6,12 @@ import UserProvider from "./context/userContext";
 import Home from "./pages/Home";
 import AddNewUser from "./pages/AddNewUser";
 import EditUser from "./pages/EditUser";
-import { stylesObject } from "./types/types";
-
-
-
-const styles: stylesObject = {
-  container: {
-    backgroundImage: `url(${process.env.PUBLIC_URL}/background.png)`,
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    backgroundPosition: "center center",
-    minHeight: "100vh",
-  },
-};
+import styles from "./style/styles";
 
 function App() {
-
   return (
     <UserProvider>
-      <Box className="App" style={styles.container}>
+      <Box className="App" style={styles.app}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="new" element={<AddNewUser />} />

@@ -7,6 +7,7 @@ import { getData } from "../utils/utils";
 import UserList from "../components/UserList";
 
 import { UserContext } from "../context/userContext";
+import styles from "../style/styles";
 
 export default function Home() {
   const { users, setUsers } = React.useContext(UserContext) as UserContextType;
@@ -16,7 +17,9 @@ export default function Home() {
   const navigate = useNavigate();
 
   const usersPerPage = 10;
-  const paginationCount = Math.ceil(users ? users.length / usersPerPage : 0);
+  const paginationCount: number = Math.ceil(
+    users ? users.length / usersPerPage : 0
+  );
 
   async function getUsers() {
     try {
@@ -56,24 +59,14 @@ export default function Home() {
               setPage={setPage}
             />
           </Grid>
-          <Grid
-            item
-            xs={12}
-            sx={{
-              my: 3,
-              textAlign: "center",
-              mx: "auto",
-              width: "100%",
-              maxWidth: { xs: "300px", md: "450px" },
-            }}
-          >
+          <Grid item xs={12} sx={styles.homePageItems}>
             <Button
               onClick={() => handleOnClickNavigate()}
               variant="contained"
-              sx={{
-                width: "100%",
-                backgroundColor: "#FF177A",
-              }}
+              sx={[
+                styles.button,
+                styles.buttonHover,
+              ]}
             >
               Add new User
             </Button>
@@ -83,7 +76,7 @@ export default function Home() {
         <Grid
           item
           xs={12}
-          sx={{ mt: 15, maxWidth: { xs: "300px", md: "450px" }, mx: "auto" }}
+          sx={[{ mt: 15 }, styles.homePageItems]}
         >
           <Alert severity="error"> {alert}</Alert>
         </Grid>
