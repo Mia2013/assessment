@@ -33,7 +33,6 @@ export type FormData = {
 
 export type AlertType = {
   severity: SeverityStatus;
-  display: boolean;
   message: string;
 };
 
@@ -41,11 +40,6 @@ export enum SeverityStatus {
   Error = "error",
   Success = "success",
 }
-
-export type FieldsError = {
-  firstName: boolean;
-  lastName: boolean;
-};
 
 export type LockTheUserProps = {
   user: User;
@@ -63,15 +57,24 @@ export interface UserProviderProps {
 }
 
 export interface InputFieldProps {
-  error: boolean;
+  error: string;
   label: string;
   name: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
+
+export interface AddOrEditUserProps {
+  formTitle: string;
+  alertMessage: string;
+  buttonTitle: string;
+  AddOrEditUserFunction: (value: FormData, userId: number) => Promise<any>;
+  userId?: number| undefined;
+}
+
 export interface FormProps {
   formData: FormData;
-  fieldsError: FieldsError;
+  alert: string;
   handleOnSubmit: (value: React.SyntheticEvent) => void;
   title: string;
   buttonTitle: string;

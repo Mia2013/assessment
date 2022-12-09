@@ -38,6 +38,10 @@ const styles = {
     m: 5,
     textAlign: "end",
     width: "100px",
+  },
+  textField: {
+    "& .MuiTextField-root": { m: 3, width: "90%" },
+    my: 5,
   }
 };
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UserStatus, User } from "../types/types";
+import { UserStatus, User, Users, FormData } from "../types/types";
 
 const URL = "https://assessment-users-backend.herokuapp.com";
 
@@ -16,14 +16,17 @@ export async function getData() {
   }
 }
 
-export async function addUser(firstName: string, lastName: string) {
+export async function addUser(
+  formData: FormData,
+  userId: number
+): Promise<any> {
   try {
-    const formData = {
-      first_name: firstName,
-      last_name: lastName,
+    const data = {
+      first_name: formData.firstName,
+      last_name: formData.lastName,
       status: UserStatus.Active,
     };
-    const response = await axios.post(`${URL}/users.json`, formData);
+    const response = await axios.post(`${URL}/users.json`, data);
     if (response.status === 201) {
       const result = response.data;
       return result;
@@ -48,16 +51,15 @@ export async function getOneUserById(userId: number) {
 }
 
 export async function editUser(
-  firstName: string,
-  lastName: string,
+  formData: FormData,
   userId: number
-) {
+): Promise<any> {
   try {
-    const formData = {
-      first_name: firstName,
-      last_name: lastName,
+    const data = {
+      first_name: formData.firstName,
+      last_name: formData.lastName,
     };
-    const response = await axios.put(`${URL}/users/${userId}.json`, formData, {
+    const response = await axios.put(`${URL}/users/${userId}.json`, data, {
       headers: { "Content-Type": "application/json" },
     });
     if (response.status === 204) {

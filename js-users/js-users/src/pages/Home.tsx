@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { Grid, Alert, Button } from "@mui/material";
 import PaginationRounded from "../components/PaginationRounded";
 import { UserContextType } from "../types/types";
-import { getData } from "../utils/utils";
 import UserList from "../components/UserList";
 
 import { UserContext } from "../context/userContext";
@@ -60,7 +59,7 @@ export default function Home() {
             <Button
               onClick={() => handleOnClickNavigate()}
               variant="contained"
-              sx={[styles.button, styles.buttonHover]}
+              sx={[styles.buttonColor, styles.button, styles.buttonHover]}
             >
               Add new User
             </Button>

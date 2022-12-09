@@ -2,10 +2,11 @@ import React from "react";
 import { Button, Box, Typography } from "@mui/material";
 import InputField from "./InputField";
 import { FormProps, FormData } from "../../types/types";
+import styles from "../../style/styles";
 
 export default function Form({
   handleOnSubmit,
-  fieldsError,
+  alert,
   formData,
   handleOnChange,
   title,
@@ -14,10 +15,7 @@ export default function Form({
   return (
     <Box
       component="form"
-      sx={{
-        "& .MuiTextField-root": { m: 3, width: "90%" },
-        my: 5,
-      }}
+      sx={styles.textField}
       noValidate
       autoComplete="off"
       onSubmit={handleOnSubmit}
@@ -28,7 +26,7 @@ export default function Form({
 
       <div>
         <InputField
-          error={fieldsError.firstName}
+          error={alert}
           label="First Name"
           name="firstName"
           value={formData.firstName}
@@ -37,7 +35,7 @@ export default function Form({
       </div>
       <div>
         <InputField
-          error={fieldsError.lastName}
+          error={alert}
           label="Last Name"
           name="lastName"
           value={formData.lastName}
