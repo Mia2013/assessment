@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Alert from "@mui/material/Alert";
-import LockOpen from "@mui/icons-material/LockOpen";
-import Lock from "@mui/icons-material/Lock";
+import React from "react";
+import {Box, Button, Alert} from "@mui/material";
+import {LockOpen, Lock} from "@mui/icons-material";
 import { LockTheUserProps } from "../types/types";
 import { updateUser } from "../utils/utils";
+import { UserContext } from "../context/userContext";
+import { UserContextType } from "../types/types";
 
 export default function LockTheUser({ user }: LockTheUserProps) {
   const [isLocked, setIsLocked] = React.useState<boolean>(
     user.status === "active" ? false : true
   );
   const [alert, setAlert] = React.useState<boolean>(false);
+  const { getUsers } = React.useContext(
+    UserContext
+  ) as UserContextType;
 
-  async function handleOnSubmit(e: any) {
+  async function handleOnSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
     try {
       setIsLocked(!isLocked);
@@ -24,11 +26,11 @@ export default function LockTheUser({ user }: LockTheUserProps) {
         Number(user.id)
       );
       setAlert(false);
+      getUsers();
     } catch (error) {
       setAlert(true);
     }
   }
-
 
   return (
     <Box component="form" onSubmit={handleOnSubmit}>

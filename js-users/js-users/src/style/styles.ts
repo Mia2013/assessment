@@ -1,3 +1,5 @@
+const mainColor= "#FF177A";
+
 const styles = {
   app: {
     backgroundImage: `url(${process.env.PUBLIC_URL}/background.png)`,
@@ -25,11 +27,17 @@ const styles = {
         "linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%)",
     },
   },
+  reverseButtonHover: {
+    "&:hover": {
+      color: "white",
+      backgroundColor: mainColor
+    },
+  },
   mainColor: {
-    color: "#FF177A",
+    color: mainColor,
   },
   buttonColor: {
-    backgroundColor: "#FF177A",
+    backgroundColor: mainColor,
   },
   form: {
     borderRadius: "20px",

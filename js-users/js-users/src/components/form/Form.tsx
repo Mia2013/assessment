@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Box, Typography } from "@mui/material";
 import InputField from "./InputField";
-import { FormProps, FormData } from "../../types/types";
+import { FormProps } from "../../types/types";
 import styles from "../../style/styles";
 
 export default function Form({

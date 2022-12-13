@@ -6,10 +6,8 @@ import {
   ListItemText,
   Divider,
   Grid,
-  Alert,
   Button,
   Typography,
-  Box,
 } from "@mui/material";
 import { ListProps, UserStatus } from "../types/types";
 import LockTheUser from "./LockTheUser";
@@ -48,7 +46,7 @@ export default function UserList({
                     />
                     <Button
                       onClick={() => handleOnClick(user.id)}
-                      sx={styles.mainColor}
+                      sx={[styles.mainColor, styles.reverseButtonHover]}
                     >
                       Edit
                     </Button>

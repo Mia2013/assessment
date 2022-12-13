@@ -68,8 +68,9 @@ export interface AddOrEditUserProps {
   formTitle: string;
   alertMessage: string;
   buttonTitle: string;
-  AddOrEditUserFunction: (value: FormData, userId: number) => Promise<any>;
-  userId?: number| undefined;
+  AddOrEditUserFunction: (value: FormData, userId?: number) => Promise<void>;
+  userId?: number | undefined;
+  editAbleUser?: User;
 }
 
 export interface FormProps {
@@ -79,4 +80,5 @@ export interface FormProps {
   title: string;
   buttonTitle: string;
   handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  editAbleUser?: User;
 }

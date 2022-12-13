@@ -11,13 +11,13 @@ export default function InputField({
 }: InputFieldProps) {
   return (
     <TextField
-      error={error.includes("Request failed")}
+      error={error.includes("Request failed") || error.includes("Network Error") }
       id="outlined-error-helper-text"
       label={label}
       name={name}
       value={value}
       onChange={onChange}
-      helperText={error.includes("Request failed") && error}
+      helperText={(error.includes("Request failed")|| error.includes("Network Error")) && error}
     />
   );
 }

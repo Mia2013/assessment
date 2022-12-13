@@ -9,7 +9,7 @@ import { UserContext } from "../context/userContext";
 import styles from "../style/styles";
 
 export default function Home() {
-  const { users, setUsers, getUsers } = React.useContext(
+  const { users, getUsers } = React.useContext(
     UserContext
   ) as UserContextType;
 

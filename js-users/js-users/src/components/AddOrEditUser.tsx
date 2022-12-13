@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState, useEffect, ChangeEvent, SyntheticEvent } from "react";
 import { Grid, Button, Alert } from "@mui/material";
-import { useState, ChangeEvent, SyntheticEvent } from "react";
 import {
   FormData,
   AlertType,
@@ -17,16 +16,24 @@ export default function AddOrEditUser({
   buttonTitle,
   AddOrEditUserFunction,
   userId,
+  editAbleUser,
 }: AddOrEditUserProps) {
   const [alert, setAlert] = useState<AlertType>({
     severity: SeverityStatus.Error,
     message: "",
   });
   const [formData, setFormData] = useState<FormData>({
-    firstName: "",
-    lastName: "",
+    firstName: editAbleUser?.first_name || "",
+    lastName: editAbleUser?.last_name || "",
   });
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setFormData({
+      firstName: editAbleUser?.first_name || "",
+      lastName: editAbleUser?.last_name || "",
+    });
+  }, [editAbleUser]);
 
   function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -36,7 +43,7 @@ export default function AddOrEditUser({
   async function handleOnSubmit(e: SyntheticEvent) {
     e.preventDefault();
     try {
-      await AddOrEditUserFunction(formData, (userId = 0));
+      await AddOrEditUserFunction(formData, userId);
       setAlert({
         severity: SeverityStatus.Success,
         message: alertMessage,
@@ -76,9 +83,8 @@ export default function AddOrEditUser({
           formData={formData}
           handleOnChange={handleOnChange}
           title={formTitle}
-          //
           buttonTitle={buttonTitle}
-          //
+          editAbleUser={editAbleUser}
         />
         {alert.message && (
           <Alert severity={alert.severity}>{alert.message}</Alert>

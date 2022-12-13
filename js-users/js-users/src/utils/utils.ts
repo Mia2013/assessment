@@ -3,7 +3,7 @@ import { UserStatus, User, Users, FormData } from "../types/types";
 
 const URL = "https://assessment-users-backend.herokuapp.com";
 
-export async function getData() {
+export async function getData(): Promise<Users | Error> {
   try {
     const response = await axios.get(`${URL}/users.json`);
     if (response.status === 200) {
@@ -16,10 +16,7 @@ export async function getData() {
   }
 }
 
-export async function addUser(
-  formData: FormData,
-  userId: number
-): Promise<any> {
+export async function addUser(formData: FormData): Promise<void> {
   try {
     const data = {
       first_name: formData.firstName,
@@ -37,7 +34,7 @@ export async function addUser(
   }
 }
 
-export async function getOneUserById(userId: number) {
+export async function getOneUserById(userId: number): Promise<User | Error> {
   try {
     const response = await axios.get(`${URL}/users/${userId}.json`);
     if (response.status === 200) {
@@ -52,16 +49,18 @@ export async function getOneUserById(userId: number) {
 
 export async function editUser(
   formData: FormData,
-  userId: number
-): Promise<any> {
+  userId?: number
+): Promise<void> {
   try {
     const data = {
       first_name: formData.firstName,
       last_name: formData.lastName,
     };
+
     const response = await axios.put(`${URL}/users/${userId}.json`, data, {
       headers: { "Content-Type": "application/json" },
     });
+
     if (response.status === 204) {
       const result = response.data;
       return result;
@@ -77,7 +76,7 @@ export async function updateUser(
   lastName: string,
   isLocked: boolean,
   userId: number
-) {
+): Promise<void> {
   try {
     const formData = {
       first_name: firstName,

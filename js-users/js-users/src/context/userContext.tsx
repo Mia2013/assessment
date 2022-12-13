@@ -3,7 +3,6 @@ import {
   UserProviderProps,
   UserContextType,
   Users,
-  UserStatus,
 } from "../types/types";
 import { getData } from "../utils/utils";
 
