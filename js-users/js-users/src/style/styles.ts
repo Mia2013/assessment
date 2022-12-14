@@ -33,6 +33,12 @@ const styles = {
       backgroundColor: mainColor
     },
   },
+  reverseLockButtonHover: {
+    "&:hover": {
+      color: "white",
+      backgroundColor: "#1976d2",
+    },
+  },
   mainColor: {
     color: mainColor,
   },
@@ -50,7 +56,8 @@ const styles = {
   textField: {
     "& .MuiTextField-root": { m: 3, width: "90%" },
     my: 5,
-  }
+  },
+  lockTheUserBox:{display: "flex", flexDirection: "column" }
 };
 
 export default styles;

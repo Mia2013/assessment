@@ -1,9 +1,9 @@
 import axios from "axios";
-import { UserStatus, User, Users, FormData } from "../types/types";
+import { UserStatus, User, FormData } from "../types/types";
 
 const URL = "https://assessment-users-backend.herokuapp.com";
 
-export async function getData(): Promise<Users | Error> {
+export async function getData(): Promise<User[]> {
   try {
     const response = await axios.get(`${URL}/users.json`);
     if (response.status === 200) {
@@ -34,7 +34,7 @@ export async function addUser(formData: FormData): Promise<void> {
   }
 }
 
-export async function getOneUserById(userId: number): Promise<User | Error> {
+export async function getOneUserById(userId: number): Promise<User> {
   try {
     const response = await axios.get(`${URL}/users/${userId}.json`);
     if (response.status === 200) {
@@ -56,7 +56,6 @@ export async function editUser(
       first_name: formData.firstName,
       last_name: formData.lastName,
     };
-
     const response = await axios.put(`${URL}/users/${userId}.json`, data, {
       headers: { "Content-Type": "application/json" },
     });
