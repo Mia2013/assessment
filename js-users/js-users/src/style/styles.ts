@@ -57,7 +57,7 @@ const styles = {
     "& .MuiTextField-root": { m: 3, width: "90%" },
     my: 5,
   },
-  lockTheUserBox:{display: "flex", flexDirection: "column" }
+  lockTheUserBox:{display: "flex", flexDirection: "column" },
 };
 
 export default styles;
